@@ -1,0 +1,8 @@
+<h1>Show Question</h1>
+
+<p>
+  <strong> Question:</strong>
+  <%= @question.question %>
+</p>
+
+<%= link_to 'Home', questions_path %> | <%= link_to 'Edit', edit_question_path(@article) %> | <%= link_to 'Destroy', question_path(question), method: :delete, data: { confirm: "Are you sure?" } %>
