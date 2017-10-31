@@ -5,4 +5,7 @@
   <%= @question.question %>
 </p>
 
-<%= link_to 'Home', questions_path %> | <%= link_to 'Edit', edit_question_path(@article) %> | <%= link_to 'Destroy', question_path(question), method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to 'Home', questions_path %>
+  <% if current_user && (session[:user_id] = @question.user_id) %>
+       | <%= link_to 'Edit', edit_question_path(@question) %> | <%= link_to 'Destroy', question_path(@question), method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>

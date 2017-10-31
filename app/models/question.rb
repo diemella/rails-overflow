@@ -1,3 +1,3 @@
 class Question < ApplicationRecord
-  validates :question, presence: true
+  validates :question, :user_id, presence: true
 end

@@ -1,0 +1,7 @@
+<h1><%= @user.name %>'s Profile</h1>
+
+<ul>
+  <% @user.questions.each do |question| %>
+    <li><%= question.question %></li>
+  <% end %>
+</ul>

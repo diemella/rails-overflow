@@ -1,50 +1,50 @@
 class QuestionsController < ApplicationController
 
-  def index
+  def index # get '/questions'
     @questions = Question.all
   end
 
-  def show
+  def show # get '/questions/:id'
     @question = Question.find(params[:id])
   end
 
-  def new
-    @question = Question.new
+  def new # get '/questions/new'
+    @question = Question.new # rails knows to look in views/questions for new.html.erb
   end
 
-  def edit
+  def edit # get '/questions/:id/edit'
     @question = Question.find(params[:id])
   end
 
-  def create
-    @question = Question.new(question: params[:question])
+  def create # post '/questions'
+    @question = Question.new(question: params[:question][:question], user_id: session[:user_id])
 
     if @question.save
-      redirect_to @question
+      redirect_to question_path(@question) # redirect "/questions/#{@question.id}"
     else
-      render 'new'
+      render 'new' # erb :'/questions/new'
     end
   end
 
-  def update
+  def update # put '/questions/:id'
     @question = Question.find(params[:id])
 
-    if @question.update(question: params[:question])
-      redirect_to @question
+    if @question.update(question: params[:question][:question], user_id: session[:user_id])
+      redirect_to question_path(@question) # redirect "/questions/#{@question.id}"
     else
-      render 'edit'
+      render 'edit' # erb :'/questions/edit'
     end
   end
 
-  def destroy
+  def destroy # delete '/questions/:id'
     @question = Question.find(params[:id])
     @question.destroy
 
-    redirect_to questions_path
+    redirect_to questions_path # redirect '/questions'
   end
 
 private
-  def question_params
+  def question_params # 'strong parameters' with require and permit for security reasons
 
   end
 
